@@ -1,0 +1,121 @@
+#============================
+# JDK
+#============================
+# Properties for EAP Install
+jdk_file_name=jdk-7u79-linux-x64.tar.gz
+# vendor= Oracle, OpenJDK
+jdk_vendor=Oracle
+install_jdk=no
+use_root_user_for_jdk=no
+
+#============================
+# JBoss 설치관련
+#============================
+install_eap=yes
+install_eap_os_package=no
+
+jboss_eap_version=6.4
+jboss_engine_file_name=jboss-eap-6.4.0.zip
+
+## 패치 관련파일
+install_eap_patch=yes
+# 패치 히스토리파일 삭제
+ageout_history=yes
+jboss_engine_patch_file_name.0=jboss-eap-6.4.9-patch.zip
+#jboss_engine_patch_file_name.1=jboss-eap-6.4.12-patch.zip
+jboss_engine_patch_file_name.1=jboss-eap-6.4.13-patch.zip
+
+# Native 커넥터
+jboss_eap_native_file_name=jboss-eap-native-6.4.0-RHEL6-x86_64.zip
+
+## Profile 종류 
+# standalone, standalone-ha, standalone-full, standalone-full-ha, standalone-osgi
+config_profile=standalone-ha
+module_ext_file_name=modules.ext.2014-1226.tgz
+
+## 엔진 템플릿 파일만 생성 - yes or no
+## yes = no install jboss and make install files only
+## no = make install files and copy them to target server
+build_template_only=no
+
+## Native Component 파일 설치 - Target Server에만 설치( 템플릿 서버에 설치하면 OS 차이로 문제 발생가능) 
+use_native_component=yes
+
+# ulimit ( 타겟서버의 값이 설정하려는 값보다 작을 때만 설정함)
+setup_ulimit=no
+ulimit.0=nofile 65535
+ulimit.1=nproc 10240
+
+# kernel_parameters
+setup_kernel_parameters=no
+kernel_parameter.0=net.ipv4.tcp_keepalive_time=30
+kernel_parameter.1=net.ipv4.ip_local_port_range='1024 65000'
+kernel_parameter.2=net.ipv4.tcp_fin_timeout=10
+kernel_parameter.3=net.core.netdev_max_backlog=2500
+kernel_parameter.4=net.ipv4.tcp_retries1=2
+kernel_parameter.5=net.ipv4.tcp_retries2=3
+kernel_parameter.6=net.core.rmem_max=56777216
+kernel_parameter.7=net.core.rmem_default=16777216
+kernel_parameter.8=net.core.wmem_max=56777216
+kernel_parameter.9=net.core.wmem_default=16777216
+
+## temp directory for sw
+tmp_file_path=/tmp
+
+#============================
+# Web Server
+#============================
+install_httpd=no
+
+## 웹서버 종류: jws3, eap_httpd, httpd22, httpd24
+httpd_type=httpd24
+
+# 웹서버 종류에 따라 설치파일이 달라진다.
+##jws3: jws-httpd-3.0.3-RHEL6-x86_64.zip,jws-httpd-3.0.3-RHEL7-x86_64.zip
+##eap_httpd: jboss-ews-httpd-2.1.0-RHEL6-x86_64.zip, jboss-ews-httpd-2.1.0-RHEL7-x86_64.zip
+## httpd22: httpd-2.2.31.tar.gz   
+## httpd24: httpd-2.4.23.tar.gz  
+httpd_file_name=httpd-2.4.23.tar.gz
+
+## rhel_version별로 Web서버를 위해 설치할 OS Package가 달라진다.
+## Different Package install depending on OS Version 6,7
+# use rhel_version=7 for httpd-2.4
+install_httpd_os_package=yes
+rhel_version=7
+
+#============================
+# Web/Was Connector
+#============================
+
+# 커넥터 종류
+## mod_jk, mod_cluster
+# mod_cluster는 jws3, eap_httpd 만 가능하다.
+httpd_connector_type=mod_jk
+ 
+
+ 
+ 
+## 커넥터 파일명
+# httpd_eap: jboss-eap-native-webserver-connectors-6.4.0-RHEL6-x86_64.zip, 
+# httpd22/httpd24: tomcat-connectors-1.2.41-src.tar.gz
+# jws30 has connector file inside itself
+httpd_connector_file_name=tomcat-connectors-1.2.41-src.tar.gz
+ 
+## 커뮤니티 버전은 커넥터를 별도로 컴파일하여 설치한다.
+## httpd22, httpd24 (Community Version Only) yes / no
+install_httpd_connector=yes
+
+
+
+#============================
+# Test or Install
+#============================
+## test, install
+# test: SSH Connection Test, Directory Test
+operation_mode=install
+ 
+#============================
+# Report
+#============================
+## Display null value in report
+display_null_value=no
